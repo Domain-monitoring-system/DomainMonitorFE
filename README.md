@@ -18,46 +18,65 @@ The Domain Monitor Frontend is a web application that provides a user-friendly i
 
 ```
 domain-monitor-frontend/
-├── index.html               # Login page
-├── registration.html        # Registration page
-├── dashboard.html           # Main dashboard
-├── style.css                # Styles for login/registration
-├── dashboard-style.css      # Styles for dashboard
-├── script.js                # Login/registration scripts
-├── registration_script.js   # Registration form validation
-├── dashbored_script.js      # Dashboard functionality
-├── Dockerfile               # Docker configuration
-└── static/
-    └── favicon.ico          # Website favicon
+├── static/                     # Static files
+│   ├── dashboard-style.css     # Dashboard styles
+│   ├── style.css               # Login/registration styles
+│   ├── script.js               # Login/registration scripts
+│   ├── registration_script.js  # Registration validation
+│   ├── dashbored_script.js     # Dashboard functionality
+│   └── favicon.ico             # Website favicon
+├── templates/                  # HTML templates
+│   ├── index.html              # Login page
+│   ├── registration.html       # Registration page
+│   └── dashboard.html          # Main dashboard
+├── __pycache__/                # Python cache files (not tracked in git)
+├── app.py                      # Main Flask application
+├── config.py                   # Configuration and environment variables
+├── Dockerfile                  # Docker configuration
+├── requirements.txt            # Python dependencies
+├── .env                        # Environment variables (not tracked in git)
+└── README.md                   # Project documentation
 ```
 
 ## Setup and Installation
 
 ### Prerequisites
 
-- Web server (Nginx, Apache, etc.) or Docker
+- Python 3.9+
+- Flask and required packages
+- Backend API service running
 
 ### Local Development Setup
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/YourUsername/domain-monitor-frontend.git
+   git clone https://github.com/RazielRey/domain-monitor-frontend.git
    cd domain-monitor-frontend
    ```
 
-2. Configure backend URL
-   Open `dashbored_script.js` and update the backend URL if necessary:
-   ```javascript
-   const BACKEND_URL = 'http://localhost:5001';
-   ```
-
-3. Serve the files using a local server
+2. Create and activate a virtual environment
    ```bash
-   # Using Python's built-in HTTP server
-   python -m http.server 8080
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-4. Open your browser and navigate to `http://localhost:8080`
+3. Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Set up environment variables
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration, especially BACKEND_URL
+   ```
+
+5. Run the application
+   ```bash
+   python app.py
+   ```
+
+6. Open your browser and navigate to `http://localhost:8080`
 
 ### Docker Setup
 
@@ -68,7 +87,7 @@ domain-monitor-frontend/
 
 2. Run the container
    ```bash
-   docker run -p 8080:8080 -e BACKEND_URL=http://localhost:5001 domain-monitor-frontend
+   docker run -p 8080:8080 -e BACKEND_URL=http://backend-service:5001 domain-monitor-frontend
    ```
 
 ## Configuration
